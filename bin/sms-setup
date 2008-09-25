@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+#
+#  Created on 2008-9-25.
+#  Copyright (c) 2008. All rights reserved.
+
+begin
+  require 'rubygems'
+rescue LoadError
+  # no rubygems to load, so we fail silently
+end
+
+require 'smsinabox'
+require 'optparse'
+
+OPTIONS = {
+  :username     => nil,
+  :password     => nil
+}
+MANDATORY_OPTIONS = %w( username password )
+
+parser = OptionParser.new do |opts|
+  opts.banner = <<BANNER
+Configure your local SMS in a Box commands to use the supplied details.
+
+The configuration file is located at ~/.smsinabox and will have permissions of
+0600. It contains your password information in plain text, so be careful.
+
+Usage: #{File.basename($0)} [options]
+
+Options are:
+BANNER
+  opts.separator ""
+  opts.on("-u", "--username=USERNAME", String,
+          "Username to use") { |u| OPTIONS[:username] = u }
+  opts.on("-p", "--password=PASSWORD", String,
+          "Password to use") { |p| OPTIONS[:password] = p }
+  opts.on("-h", "--help",
+          "Show this help message.") { puts opts; exit }
+  opts.parse!(ARGV)
+
+  if MANDATORY_OPTIONS && MANDATORY_OPTIONS.find { |option| OPTIONS[option.to_sym].nil? }
+    puts opts; exit
+  end
+end
+
+config = Smsinabox::Configuration.new
+config[:username] = OPTIONS[:username]
+config[:password] = OPTIONS[:password]
+config.save
+
+puts 'Configuration file updated.'

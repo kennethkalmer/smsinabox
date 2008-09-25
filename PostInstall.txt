@@ -1,0 +1,10 @@
+
+For more information on smsinabox, see http://www.opensourcery.co.za/smsinabox
+
+Setup your account by running sms-setup now. You can then use the following
+commands to interact with SMS in a Box:
+
+sms-send: Send SMS messages
+sms-credit: Quick overview of the credit available
+sms-replies: Quick access to your replies
+sms-setup: To change the account details
