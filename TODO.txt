@@ -1,0 +1,14 @@
+SMS in a BOX TODO
+=================
+
+Lets call this the builtin LightHouse :)
+
+* Send bulk SMS messages
+* Identify and handle invalid credentials
+* Better exception generation and handling throughout the code
+* Smsinabox::Message.to_xml
+* Reply script
+* Highline dependencies for better input
+* SMS body input via STDIN
+* Multiple accounts support
+* Options to stay quite during operation

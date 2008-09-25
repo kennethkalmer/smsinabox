@@ -3,6 +3,7 @@ Manifest.txt
 PostInstall.txt
 README.rdoc
 Rakefile
+TODO.txt
 bin/sms-credit
 bin/sms-send
 bin/sms-setup
