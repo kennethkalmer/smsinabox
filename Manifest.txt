@@ -19,6 +19,7 @@ script/destroy
 script/generate
 setup.rb
 smsinabox.gemspec
+spec/message_spec.rb
 spec/smsinabox_spec.rb
 spec/spec.opts
 spec/spec_helper.rb

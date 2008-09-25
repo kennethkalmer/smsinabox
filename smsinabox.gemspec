@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = %q{smsinabox}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kenneth Kalmer"]
@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.description = %q{Ruby API for the SMS in a Box service, as well as command line utilities for interacting with SMS in a Box}
   s.email = ["kenneth.kalmer@gmail.com"]
   s.executables = ["sms-credit", "sms-send", "sms-setup"]
-  s.extra_rdoc_files = ["History.txt", "Manifest.txt", "PostInstall.txt"]
-  s.files = ["History.txt", "Manifest.txt", "PostInstall.txt", "README.rdoc", "Rakefile", "bin/sms-credit", "bin/sms-send", "bin/sms-setup", "config/hoe.rb", "config/requirements.rb", "lib/smsinabox.rb", "lib/smsinabox/configuration.rb", "lib/smsinabox/exceptions.rb", "lib/smsinabox/message.rb", "lib/smsinabox/version.rb", "script/console", "script/destroy", "script/generate", "setup.rb", "smsinabox.gemspec", "spec/smsinabox_spec.rb", "spec/spec.opts", "spec/spec_helper.rb", "tasks/deployment.rake", "tasks/environment.rake", "tasks/rspec.rake", "tasks/website.rake"]
+  s.extra_rdoc_files = ["History.txt", "Manifest.txt", "PostInstall.txt", "TODO.txt"]
+  s.files = ["History.txt", "Manifest.txt", "PostInstall.txt", "README.rdoc", "Rakefile", "TODO.txt", "bin/sms-credit", "bin/sms-send", "bin/sms-setup", "config/hoe.rb", "config/requirements.rb", "lib/smsinabox.rb", "lib/smsinabox/configuration.rb", "lib/smsinabox/exceptions.rb", "lib/smsinabox/message.rb", "lib/smsinabox/version.rb", "script/console", "script/destroy", "script/generate", "setup.rb", "smsinabox.gemspec", "spec/message_spec.rb", "spec/smsinabox_spec.rb", "spec/spec.opts", "spec/spec_helper.rb", "tasks/deployment.rake", "tasks/environment.rake", "tasks/rspec.rake", "tasks/website.rake"]
   s.has_rdoc = true
-  s.homepage = %q{http://smsinabox.rubyforge.org}
+  s.homepage = %q{http://www.opensourcery.co.za/smsinabox}
   s.post_install_message = %q{
 For more information on smsinabox, see http://www.opensourcery.co.za/smsinabox
 

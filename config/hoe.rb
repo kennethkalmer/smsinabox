@@ -5,8 +5,8 @@ EMAIL = "kenneth.kalmer@gmail.com"
 DESCRIPTION = "Ruby API for the SMS in a Box service, as well as command line utilities for interacting with SMS in a Box"
 GEM_NAME = 'smsinabox' # what ppl will type to install your gem
 RUBYFORGE_PROJECT = 'smsinabox' # The unix name for your project
-HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
-DOWNLOAD_PATH = "http://rubyforge.org/projects/#{RUBYFORGE_PROJECT}"
+HOMEPATH = "http://www.opensourcery.co.za/smsinabox"
+DOWNLOAD_PATH = "http://github.com/kennethkalmer/smsinabox"
 EXTRA_DEPENDENCIES = [
 #  ['activesupport', '>= 1.3.1']
 ]    # An array of rubygem dependencies [name, version]
