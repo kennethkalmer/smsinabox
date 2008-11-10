@@ -26,16 +26,19 @@ module Smsinabox
     private
     
     def load_config
-      @configuration = File.open( config_name, 'r' ) do |f|
-        YAML::load( f )
+      begin
+        @configuration = File.open( config_name, 'r' ) do |f|
+          YAML::load( f )
+        end
+      rescue
       end
-    rescue
-      @configuration = {}
+      
+      @configuration ||= {}
     end
     
     def check_file!
       unless File.exist?( config_name )
-        File.open( config_name, 'w' ) { |f| f.write('') }
+        File.open( config_name, 'w+' ) { |f| f.write('') }
         File.chmod( 0600, config_name )
       end
     end
