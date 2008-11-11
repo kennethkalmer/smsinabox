@@ -1,9 +1,14 @@
 require 'yaml'
 
 module Smsinabox
+  
+  # Wrapper around our YAML configuration file, which lives in ~/.smsinabox by
+  # default
   class Configuration
     
-    def initialize
+    def initialize( config_file = nil )
+      @config_file = config_file
+      
       check_file!
       load_config
     end
@@ -44,7 +49,7 @@ module Smsinabox
     end
     
     def config_name
-      File.expand_path( File.join('~', '.smsinabox') )
+      @config_file || File.expand_path( File.join('~', '.smsinabox') )
     end
   end
 end

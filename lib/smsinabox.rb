@@ -34,9 +34,9 @@ module Smsinabox
       )
     end
     
-    # Set our username and password from ~/.smsinabox
-    def configure!
-      c = Configuration.new
+    # Set our username and password from #Smsinabox::Configuration
+    def configure!( config_file = nil )
+      c = Configuration.new( config_file )
       @username = c["username"]
       @password = c["password"]
       nil

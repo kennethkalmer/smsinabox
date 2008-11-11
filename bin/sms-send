@@ -14,9 +14,11 @@ require 'optparse'
 
 OPTIONS = {
   :recipient => nil,
-  :message => nil
+  :message => nil,
+  :pipe => false,
+  :config => nil
 }
-MANDATORY_OPTIONS = %w( recipient message)
+MANDATORY_OPTIONS = %w( recipient )
 
 parser = OptionParser.new do |opts|
   opts.banner = <<BANNER
@@ -31,6 +33,10 @@ BANNER
           "The recipient of the SMS") { |r| OPTIONS[:recipient] = r }
   opts.on("-m", "--message=MESSAGE", String,
           "The body of the message (wrap in quotes)") { |m| OPTIONS[:message] = m }
+  opts.on("-c", "--config=path/to/config", String,
+          "Path to alternate config file (defaults to ~/.smsinabox)") { |m| OPTIONS[:config] = m }
+  opts.on("-p", "--pipe",
+          "Read message text from STDIN") { OPTIONS[:pipe] = true }
   opts.on("-h", "--help",
           "Show this help message.") { puts opts; exit }
   opts.parse!(ARGV)
@@ -38,16 +44,33 @@ BANNER
   if MANDATORY_OPTIONS && MANDATORY_OPTIONS.find { |option| OPTIONS[option.to_sym].nil? }
     puts opts; exit
   end
+  
+  if OPTIONS[:message].nil? && !OPTIONS[:pipe]
+    puts opts; exit
+  end
 end
 
-Smsinabox.configure!
-id = Smsinabox.send( 
+# Figure out our message
+message = if !OPTIONS[:message].nil?
+  OPTIONS[:message]
+else
+  require 'fcntl'
+  if STDIN.fcntl(Fcntl::F_GETFL, 0) == 0
+    STDIN.read
+  else
+    puts "Nothing to read from STDIN!"
+    exit 1
+  end
+end
+
+Smsinabox.configure!( OPTIONS[:config] )
+id = Smsinabox.send(
   Smsinabox::Message.new( 
-    :recipient => OPTIONS[:recipient], :body => OPTIONS[:message]
+    :recipient => OPTIONS[:recipient], :body => message
   ) 
 )
 
 puts "Message sent"
 puts "Reference: #{id}"
 puts "Recipient: #{OPTIONS[:recipient]}"
-puts "Message:   #{OPTIONS[:message]}"
+puts "Message:   #{message}"

@@ -12,6 +12,10 @@ end
 require 'smsinabox'
 require 'optparse'
 
+OPTIONS = {
+  :config => nil
+}
+
 parser = OptionParser.new do |opts|
   opts.banner = <<BANNER
 Retrieve the number of credits in the account
@@ -21,12 +25,14 @@ Usage: #{File.basename($0)} [options]
 Options are:
 BANNER
   opts.separator ""
+  opts.on("-c", "--config=path/to/config", String,
+          "Path to alternate config file (defaults to ~/.smsinabox)") { |m| OPTIONS[:config] = m }
   opts.on("-h", "--help",
           "Show this help message.") { puts opts; exit }
   opts.parse!(ARGV)
 
 end
 
-Smsinabox.configure!
+Smsinabox.configure!( OPTIONS[:config] )
 
 puts "Credits left: #{Smsinabox.credits}"

@@ -14,7 +14,8 @@ require 'optparse'
 
 OPTIONS = {
   :username     => nil,
-  :password     => nil
+  :password     => nil,
+  :config       => nil
 }
 MANDATORY_OPTIONS = %w( username password )
 
@@ -34,6 +35,8 @@ BANNER
           "Username to use") { |u| OPTIONS[:username] = u }
   opts.on("-p", "--password=PASSWORD", String,
           "Password to use") { |p| OPTIONS[:password] = p }
+  opts.on("-c", "--config=path/to/config", String,
+          "Path to alternate config file (defaults to ~/.smsinabox)") { |m| OPTIONS[:config] = m }
   opts.on("-h", "--help",
           "Show this help message.") { puts opts; exit }
   opts.parse!(ARGV)
@@ -43,7 +46,7 @@ BANNER
   end
 end
 
-config = Smsinabox::Configuration.new
+config = Smsinabox::Configuration.new( OPTIONS[:config] )
 config[:username] = OPTIONS[:username]
 config[:password] = OPTIONS[:password]
 config.save
