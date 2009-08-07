@@ -4,12 +4,13 @@ $:.unshift(File.dirname(__FILE__)) unless
 require 'net/http'
 require 'uri'
 
-require 'smsinabox/version'
 require 'smsinabox/exceptions'
 require 'smsinabox/message'
 require 'smsinabox/configuration'
 
 module Smsinabox
+
+  VERSION = '0.2.0'
   
   class << self
     
