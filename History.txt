@@ -1,3 +1,11 @@
+== 0.2.0 (Not released yet)
+
+* Upgraded to V5 of mymobileapi.com API
+* Cleaned up internals
+* Better specs
+* New delivery report class
+* Sub-classed message class for supporting VCARD and other formats later
+
 == 0.0.1 2008-09-25
 
 * 1 major enhancement:

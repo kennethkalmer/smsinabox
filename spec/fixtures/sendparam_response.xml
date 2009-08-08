@@ -1,0 +1,29 @@
+<api_result>
+  <entries_failed>
+    <numto />
+    <customerid />
+    <reason>numto invalid</reason>
+  </entries_failed>
+  <entries_success>
+    <numto>27832297941</numto>
+    <customerid>UnqiueValue1</customerid>
+  </entries_success>
+  <entries_success>
+    <numto>27832297941</numto>
+    <customerid>UnqiueValue1</customerid>
+  </entries_success>
+  <entries_success>
+    <numto>27832297941</numto>
+    <customerid>d47e1efd-5e4f-4832-ba7f-07f35d8c10f9</customerid>
+  </entries_success>
+  <send_info>
+    <eventid>27105067</eventid>
+    <credits>39763</credits>
+    <msgs_success>3</msgs_success>
+    <msgs_failed>1</msgs_failed>
+  </send_info>
+  <call_result>
+    <result>True</result>
+    <error />
+  </call_result>
+</api_result>

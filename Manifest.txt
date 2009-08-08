@@ -9,13 +9,17 @@ bin/sms-send
 bin/sms-setup
 lib/smsinabox.rb
 lib/smsinabox/configuration.rb
+lib/smsinabox/delivery_report.rb
 lib/smsinabox/exceptions.rb
 lib/smsinabox/message.rb
+lib/smsinabox/sms.rb
 script/console
 script/destroy
 script/generate
 setup.rb
 smsinabox.gemspec
+spec/delivery_report_spec.rb
+spec/fixtures/sendparam_response.xml
 spec/message_spec.rb
 spec/smsinabox_spec.rb
 spec/spec.opts
