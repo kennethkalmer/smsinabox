@@ -10,10 +10,6 @@ rescue LoadError
   require 'nokogiri'
 end
 
-#require 'smsinabox/exceptions'
-#require 'smsinabox/message'
-#require 'smsinabox/configuration'
-
 module Smsinabox
 
   VERSION = '0.2.0'
@@ -23,6 +19,8 @@ module Smsinabox
   autoload :Configuration,  'smsinabox/configuration'
   autoload :DeliveryReport, 'smsinabox/delivery_report'
   autoload :SMS,            'smsinabox/sms'
+  autoload :Reply,          'smsinabox/reply'
+  autoload :SentMessage,    'smsinabox/sent_message'
 
   class << self
 
@@ -58,6 +56,53 @@ module Smsinabox
         'data1' => message.body
       ) do |response|
         DeliveryReport.from_response( response )
+      end
+    end
+
+    # Fetch replies from the gateway and then return a collection of replies or
+    # yield each reply if a block is given
+    def replies( &block )
+      data = [
+      "<reply>",
+      "<settings>",
+      "<id>0</id>",
+      "<max_recs>100</max_recs>",
+      "<cols_returned>eventid,numfrom,receiveddata,received,sentid,sentdata,sentdatetime,sentcustomerid</cols_returned>",
+      "</settings>",
+      "</reply>"
+      ]
+      perform_request(
+        'Type' => 'replies',
+        'XMLData' => data.join
+      ) do |response|
+        replies = []
+        response.xpath('/api_result/data').each do |reply|
+          replies << Smsinabox::Reply.from_response( reply )
+        end
+        replies
+      end
+    end
+
+    def sent
+      data = [
+      "<sent>",
+      "<settings>",
+      "<id>0</id>",
+      "<max_recs>100</max_recs>",
+      "<cols_returned>sentid,eventid,smstype,numto,data,flash,customerid,status,statusdate</cols_returned>",
+      "</settings>",
+      "</sent>"
+      ]
+
+      perform_request(
+        'Type' => 'sent',
+        'XMLData' => data.join
+      ) do |response|
+        messages = []
+        response.xpath('/api_result/data').each do |msg|
+          messages << Smsinabox::SentMessage.from_response( msg )
+        end
+        messages
       end
     end
 

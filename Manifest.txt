@@ -12,6 +12,8 @@ lib/smsinabox/configuration.rb
 lib/smsinabox/delivery_report.rb
 lib/smsinabox/exceptions.rb
 lib/smsinabox/message.rb
+lib/smsinabox/reply.rb
+lib/smsinabox/sent_message.rb
 lib/smsinabox/sms.rb
 script/console
 script/destroy
@@ -21,6 +23,8 @@ smsinabox.gemspec
 spec/delivery_report_spec.rb
 spec/fixtures/sendparam_response.xml
 spec/message_spec.rb
+spec/reply_spec.rb
+spec/sent_message_spec.rb
 spec/smsinabox_spec.rb
 spec/spec.opts
 spec/spec_helper.rb
