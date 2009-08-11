@@ -14,7 +14,7 @@ $hoe = Hoe.spec 'smsinabox' do
   self.developer 'Kenneth Kalmer', 'kenneth.kalmer@gmail.com'
   self.post_install_message = 'PostInstall.txt' # TODO remove if post-install message not required
   # self.rubyforge_name       = self.name # TODO this is default value
-  # self.extra_deps         = [['activesupport','>= 2.0.2']]
+  self.extra_deps         = [['nokogiri','>= 1.3.3']]
 
 end
 
