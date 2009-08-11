@@ -61,11 +61,11 @@ module Smsinabox
 
     # Fetch replies from the gateway and then return a collection of replies or
     # yield each reply if a block is given
-    def replies( &block )
+    def replies( last_id = 0, &block )
       data = [
       "<reply>",
       "<settings>",
-      "<id>0</id>",
+      "<id>#{last_id}</id>",
       "<max_recs>100</max_recs>",
       "<cols_returned>eventid,numfrom,receiveddata,received,sentid,sentdata,sentdatetime,sentcustomerid</cols_returned>",
       "</settings>",
@@ -79,15 +79,18 @@ module Smsinabox
         response.xpath('/api_result/data').each do |reply|
           replies << Smsinabox::Reply.from_response( reply )
         end
+
+        replies.each { |r| yield r } if block_given?
+        
         replies
       end
     end
 
-    def sent
+    def sent( last_id = 0, &block )
       data = [
       "<sent>",
       "<settings>",
-      "<id>0</id>",
+      "<id>#{last_id}</id>",
       "<max_recs>100</max_recs>",
       "<cols_returned>sentid,eventid,smstype,numto,data,flash,customerid,status,statusdate</cols_returned>",
       "</settings>",
@@ -102,6 +105,9 @@ module Smsinabox
         response.xpath('/api_result/data').each do |msg|
           messages << Smsinabox::SentMessage.from_response( msg )
         end
+
+        messages.each { |m| yield m } if block_given?
+
         messages
       end
     end

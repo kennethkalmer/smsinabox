@@ -52,7 +52,7 @@ describe Smsinabox do
   it "should be able to retrieve replies" do
     mock_request(
       has_entries({'Type' => 'replies', 'Username' => 'test', 'Password' => 'test', 'XMLData' => "<reply><settings><id>0</id><max_recs>100</max_recs><cols_returned>eventid,numfrom,receiveddata,received,sentid,sentdata,sentdatetime,sentcustomerid</cols_returned></settings></reply>"}),
-      "<api_result><data><replyid></replyid><eventid></eventid><numfrom>0123456789</numfrom><receivedata>Bar</receivedata><sentid></sentid><sentdata>Foo</sentdata><sentcustomerid/><received></received><senddatetime></senddatetime></data></api_result>"
+      "<api_result><data><replyid></replyid><eventid></eventid><numfrom>0123456789</numfrom><receiveddata>Bar</receiveddata><sentid></sentid><sentdata>Foo</sentdata><sentcustomerid/><received></received><senddatetime></senddatetime></data></api_result>"
     )
 
     Smsinabox.replies do |reply|
