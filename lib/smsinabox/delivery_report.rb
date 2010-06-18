@@ -45,5 +45,16 @@ module Smsinabox
       @successes = []
     end
 
+    def inspect
+      {
+        :event_id => @event_id,
+        :credits => @credits,
+        :fail_count => @fail_count,
+        :success_count => @success_count,
+        :failues => @failures.inspect,
+        :successes => @successes.inspect
+      }
+    end
+
   end
 end

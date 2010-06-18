@@ -64,13 +64,13 @@ else
 end
 
 Smsinabox.configure!( OPTIONS[:config] )
-id = Smsinabox.send(
+report = Smsinabox.deliver(
   Smsinabox::Message.new( 
     :recipient => OPTIONS[:recipient], :body => message
   )
 )
 
 puts "Message sent"
-puts "Reference: #{id}"
+puts "Reference: #{report.inspect}"
 puts "Recipient: #{OPTIONS[:recipient]}"
 puts "Message:   #{message}"

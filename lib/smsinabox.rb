@@ -12,7 +12,7 @@ end
 
 module Smsinabox
 
-  VERSION = '0.2.2'
+  VERSION = '0.2.3'
 
   autoload :Exceptions,     'smsinabox/exceptions'
   autoload :Message,        'smsinabox/message'
