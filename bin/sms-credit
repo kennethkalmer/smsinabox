@@ -31,8 +31,8 @@ BANNER
   opts.on("-c", "--config=path/to/config", String,
           "Path to alternate config file (defaults to ~/.smsinabox)") { |m| OPTIONS[:config] = m }
   opts.on("--nagios", "Enable nagios mode") { OPTIONS[:nagios] = true }
-  opts.on("--warn=N", "Number of credit for warning, default 100 (nagios-mode only)") { |w| OPTIONS[:warn] = w }
-  opts.on("--critical=N", "Number of credit for critical, default 50 (nagios-mode only)") { |c| OPTIONS[:crit] = c }
+  opts.on("--warn=N", Integer, "Number of credit for warning, default 100 (nagios-mode only)") { |w| OPTIONS[:warn] = w }
+  opts.on("--critical=N", Integer, "Number of credit for critical, default 50 (nagios-mode only)") { |c| OPTIONS[:crit] = c }
   opts.on("-h", "--help",
           "Show this help message.") { puts opts; exit }
   opts.parse!(ARGV)
