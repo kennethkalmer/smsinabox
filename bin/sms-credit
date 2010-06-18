@@ -13,7 +13,10 @@ require 'smsinabox'
 require 'optparse'
 
 OPTIONS = {
-  :config => nil
+  :config => nil,
+  :nagios => false,
+  :crit => 50,
+  :warn => 100
 }
 
 parser = OptionParser.new do |opts|
@@ -27,12 +30,47 @@ BANNER
   opts.separator ""
   opts.on("-c", "--config=path/to/config", String,
           "Path to alternate config file (defaults to ~/.smsinabox)") { |m| OPTIONS[:config] = m }
+  opts.on("--nagios", "Enable nagios mode") { OPTIONS[:nagios] = true }
+  opts.on("--warn=N", "Number of credit for warning, default 100 (nagios-mode only)") { |w| OPTIONS[:warn] = w }
+  opts.on("--critical=N", "Number of credit for critical, default 50 (nagios-mode only)") { |c| OPTIONS[:crit] = c }
   opts.on("-h", "--help",
           "Show this help message.") { puts opts; exit }
   opts.parse!(ARGV)
-
 end
 
 Smsinabox.configure!( OPTIONS[:config] )
 
-puts "Credits left: #{Smsinabox.credits}"
+if !OPTIONS[:nagios]
+  puts "Credits left: #{Smsinabox.credits}"
+  exit
+end
+
+errors = {
+  :ok => 0,
+  :warn => 1,
+  :crit => 2,
+  :unknown => 3
+}
+
+begin
+
+  credits = Smsinabox.credits
+  msg = "%s: #{credits} sms credits remaining for #{Smsinabox.username}"
+
+  if credits < OPTIONS[:crit]
+    puts msg % [ 'CRITICAL' ]
+    exit errors[:crit]
+  end
+
+  if credits < OPTIONS[:warn]
+    puts msg % [ 'WARNING' ]
+    exit errors[:warn]
+  end
+
+  puts msg % ['OK' ]
+  exit errors[:ok]
+
+rescue => e
+  puts "UNKNOWN: Could not determine sms credits for #{Smsinabox.username} (#{e.message})"
+  exit errors[:unknown]
+end

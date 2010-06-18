@@ -12,7 +12,7 @@ end
 
 module Smsinabox
 
-  VERSION = '0.2.0'
+  VERSION = '0.2.1'
 
   autoload :Exceptions,     'smsinabox/exceptions'
   autoload :Message,        'smsinabox/message'
@@ -40,6 +40,7 @@ module Smsinabox
         xml.xpath('/api_result/data/credits/text()').to_s.to_i
       end
     end
+    alias :credits :credit_remaining
 
     # Send a #Messages and returns a #DelieryReport
     def deliver( message )
@@ -81,7 +82,7 @@ module Smsinabox
         end
 
         replies.each { |r| yield r } if block_given?
-        
+
         replies
       end
     end
