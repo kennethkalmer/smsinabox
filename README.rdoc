@@ -19,7 +19,7 @@ sending SMS's and checking account balances
 
 == INSTALL:
 
-* sudo gem install kennethkalmer-smsinabox
+* sudo gem install smsinabox
 
 == LICENSE:
 

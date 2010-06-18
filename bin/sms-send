@@ -42,11 +42,11 @@ BANNER
   opts.parse!(ARGV)
 
   if MANDATORY_OPTIONS && MANDATORY_OPTIONS.find { |option| OPTIONS[option.to_sym].nil? }
-    puts opts; exit
+    puts opts; exit 1
   end
-  
+
   if OPTIONS[:message].nil? && !OPTIONS[:pipe]
-    puts opts; exit
+    puts opts; exit 1
   end
 end
 
@@ -67,7 +67,7 @@ Smsinabox.configure!( OPTIONS[:config] )
 id = Smsinabox.send(
   Smsinabox::Message.new( 
     :recipient => OPTIONS[:recipient], :body => message
-  ) 
+  )
 )
 
 puts "Message sent"
